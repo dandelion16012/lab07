@@ -3,7 +3,7 @@ name: Push_release_w/_tag
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
                         
 jobs:
   Make_GitHub_Release:
@@ -15,9 +15,9 @@ jobs:
                         
     - name: Release
       id  : create_release
-      uses: actions/create-release@v1
+      uses: actions/create-release@v3
       env :
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -32,7 +32,7 @@ jobs:
     
     steps:
     - name: Git clone my repo
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Prepare environment
       run : |
@@ -46,9 +46,9 @@ jobs:
         cpack -G ZIP
     - name: Upload TGZ
       id  : TGZ
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v3
       env :
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with: 
        upload_url: ${{ needs.Make_GitHub_Release.outputs.upload_url }}
        asset_path: ./cmake/solver-0.1.1-Linux.tar.gz
@@ -57,9 +57,9 @@ jobs:
        
     - name: Upload ZIP
       id  : ZIP
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v3
       env :
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with: 
        upload_url: ${{ needs.Make_GitHub_Release.outputs.upload_url }}
        asset_path: ./cmake/solver-0.1.1-Linux.zip
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Git clone my repo
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Prepare environment
       run : |
@@ -87,9 +87,9 @@ jobs:
         
     - name: Upload DEB
       id  : DEB
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v3
       env :
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN}}
       with: 
        upload_url: ${{ needs.Make_GitHub_Release.outputs.upload_url }}
        asset_path: ./cmake/solver-0.1.1-Linux.deb
@@ -98,9 +98,9 @@ jobs:
        
     - name: Upload RPM
       id  : RPM
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v3
       env :
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with: 
        upload_url: ${{ needs.Make_GitHub_Release.outputs.upload_url }}
        asset_path: ./cmake/solver-0.1.1-Linux.rpm
