@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 3.12)
-
-project(main)
-
-set(CMAKE_CXX_STANDART 17)
-
-# Add sub directories
-add_subdirectory(formatter_lib)
-add_subdirectory(formatter_ex_lib)
-add_subdirectory(solver_lib)
-add_subdirectory(solver_application)
+cmake_minimum_required(VERSION 3.2) 
+ 
+project (project_hw) 
+ 
+add_executable(hello_world_app 
+    hello_world.cpp 
+) 
+ 
+install(TARGETS hello_world_app hello_world_app RUNTIME DESTINATION /bin)
 
